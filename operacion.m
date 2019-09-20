@@ -11,7 +11,7 @@ function operacion()
     C = [Z zeros(1,ln - size(Z,2))];
     BCol=[size(a,2)+1:ln];
     
-    terminar = false
+    terminar = false;
     
     while ~terminar
         %iteracion 
@@ -25,7 +25,7 @@ function operacion()
         %busca los negativos(borrar cometario)
         [Min_in Ind_in] = min(Zi_Ci);
         if Min_in >= 0
-            terminar = true
+            terminar = true;
         end
         %--------------------------------
         fprintf('entra X%d\n',Ind_in);
