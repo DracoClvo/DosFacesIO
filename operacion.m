@@ -22,16 +22,18 @@ function operacion()
     [Min_in Ind_in] = min(Zi_Ci);
     %--------------------------------
     fprintf('entra X%d\n',Ind_in);
-            %sin conflictos%
-    
-    B1b = B1 * b
-    B1ai = B1 * A(:,Ind_in)
-    divX = B1b/B1ai
-    divX = divX.'
-    divX = divX(1,:)
-    [Min_out Ind_out] = min(divX)
-    
+    B1b = B1 * b;
+    B1ai = B1 * A(:,Ind_in);
+    divX = DivX(B1b,B1ai);
+    [Min_out Ind_out] = min(divX);
+        %sin conflictos%
+        
     fprintf('sale X%d\n',BCol(Ind_out));
     BCol(Ind_out)= Ind_in;
     B(:,Ind_out) = A(:,Ind_in)
+end
+function divXelm = DivX(a,b)
+    for i=1:size(a)
+        divXelm(i) = a(i)/b(i);
+    end
 end
