@@ -1,5 +1,6 @@
 function operacion()
     clc;
+    %Inicializacion
     Z=input('Z = '); %[-300 -400]; %Se define A como funcion objetivo
     a=input('coeficientes = '); %[ 3 3 ;3 6];     %Se define B como restricciones 
     b=input('b = '); %[ 120; 180];       %Se define C como recursos
@@ -10,7 +11,7 @@ function operacion()
     C = [Z zeros(1,ln - size(Z,2))];
     BCol=[size(a,2)+1:ln];
     
-    
+    %iteracion 
     CBt = C(BCol(:));
     B1 = inv(B);
     CBtB1 = CBt * B1;
@@ -25,20 +26,13 @@ function operacion()
     B1b = B1 * b;
     B1ai = B1 * A(:,Ind_in);
     divX = DivX(B1b,B1ai);
-    [Min_out Ind_out] = min(divX);
+    [Min_out Ind_out] = min(divX)
         
     fprintf('sale X%d\n',BCol(Ind_out));
     BCol(Ind_out)= Ind_in;
     B(:,Ind_out) = A(:,Ind_in)
     
-end
-function divXelm = DivX(a,b)
-    for i=1:size(a)
-        if b(i) < 0
-           divXelm(i) = inf; 
-        else
-            divXelm(i) = a(i)/b(i);
-        end
-        
-    end
+    
+    %Solucion de Z
+    Zt= CBt * B1b
 end
