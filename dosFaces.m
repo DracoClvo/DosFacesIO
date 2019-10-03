@@ -1,8 +1,5 @@
 function dosFaces()
-%**METODO SIMPLEX**
- 
-%**Para cambiar a metodo simplex de tres dimensiones es necesario agregar
-%las terceras variables a cada matriz respectivamente
+
  
 C=input('C = '); %[-300 -400]; %Se define A como funcion objetivo
 A=input('A = '); %[ 3 3 ;3 6];     %Se define B como restricciones 
