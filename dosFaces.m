@@ -9,7 +9,8 @@ A=input('A = '); %[ 3 3 ;3 6];     %Se define B como restricciones
 B=input('B = '); %[ 120; 180];       %Se define C como recursos
 
 In=size(A,1); %Se guarda en In el número de restricciones
-Xsol=[A eye(In) B ; C zeros(1,In) 0]
+In2 = size(B,1);
+Xsol=[zeros(1,size(C,2)) ones(1,In2) 0;A eye(In2) B]
 
-[A eye(size(B,1)) B;zeros(1,size(C,2)) ones(1,size(B,1)) 0]
+
 end
