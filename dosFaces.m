@@ -1,6 +1,4 @@
 function dosFaces()
-clc;
-clear;
 %**METODO SIMPLEX**
  
 %**Para cambiar a metodo simplex de tres dimensiones es necesario agregar
