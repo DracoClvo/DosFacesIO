@@ -1,4 +1,4 @@
-function operacion()
+function simplexR()
     clc;
     %Inicializacion
     Z=input('Z = '); %[-300 -400]; %Se define A como funcion objetivo
