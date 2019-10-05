@@ -1,9 +1,12 @@
 function dosFaces()
-    tableau=input('tableau [maxz;restricciones <=> valores]\n= ');
+    tableau=input('tableau [maxz'';restricciones <=> valores]\n= ');
     var_in_izq = input('ubicacion yis lado izquierdo 0 si no yi \n= ');
+    restric = input('restricciones originales\n= ');
+    restric = restric * -1;
     % primera fase
     ln = size(tableau,2);
     tableau(1,:) = tableau(1,:) - sumatoria(var_in_izq,tableau)
+    yn = cont(var_in_izq);
     var_in_izq = var_in_izq * -1;
     while(min(var_in_izq)< 0)
         [valin,entra]=min(tableau(1,1:end-1));
@@ -19,6 +22,8 @@ function dosFaces()
         end
         tableau = ceros(tableau)
     end
+    %segunda fase
+    tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
 end
 function suma = sumatoria(variz,tabl)
     suma = zeros(1,size(tabl,2));
@@ -36,6 +41,15 @@ function tab=ceros(tableau)
             else
                 tab(i,j) = tableau(i,j);
             end
+        end
+    end
+end
+function yn = cont(verin)
+    yn=0;
+    for i=1:size(verin,2)
+        verin(i)
+        if(verin(i) == 1)
+            yn = yn + 1;
         end
     end
 end
