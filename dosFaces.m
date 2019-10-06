@@ -30,7 +30,7 @@ function dosFaces()
     while( 0>min(tableau(1,1:end-1)))
         [valin,indin] = min(tableau(1,:));
         fprintf('entra X%d\n',indin);
-        div = DivX(tableau(:,end),tableau(:,1));
+        div = DivX(tableau(:,end),tableau(:,indin));
         [valout, indout] = min (div);
         fprintf('sale X%d\n',var_in_izq(indout));
         var_in_izq(indout) = indin;
