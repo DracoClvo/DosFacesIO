@@ -1,7 +1,7 @@
 function dosFaces()
-    tableau=input('tableau [maxz'';restricciones <=> valores]\n= ');
-    var_in_izq = input('ubicacion yis lado izquierdo 0 si no yi \n= ');
-    restric = input('restricciones originales\n= ');
+    tableau=input('tableau [maxz'';restricciones <=> valores]\n= ')
+    var_in_izq = input('ubicacion yis lado izquierdo 0 si no yi \n= ')
+    restric = input('restricciones originales\n= ')
     restric = restric * -1;
     % primera fase
     fprintf('primera fase');
@@ -49,9 +49,9 @@ function dosFaces()
 end
 function suma = sumatoria(variz,tabl)
     suma = zeros(1,size(tabl,2));
-    for i=1:size(variz,2)
-        if(variz(i) == 1)
-            suma = suma + tabl(i+1,:);
+    for i=2:size(variz,2)
+        if(variz(i-1) == 1)
+            suma = suma + tabl(i,:);
         end
     end
 end
