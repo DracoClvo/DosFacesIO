@@ -24,6 +24,20 @@ function dosFaces()
     end
     %segunda fase
     tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
+    
+    [valin,indin] = min(tableau(1,:));
+    fprintf('entra X%f',indin);
+    div = DivX(tableau(:,end),tableau(:,1));
+    [valout, indout] = min (div);
+    fprintf('sale X%f',var_in_izq(indout));
+    var_in_izq(indout) = indin;
+    tableau(intout,:)= tableau(indout,:) / tableau(indout,indin);
+    for i=1:1:size(tableau,1)  %Hace el gauss
+        if i~=f   %No realiza el gauss en la fila pivote
+            tableau(i,:)=tableau(i,:)-(tableau(i,c)*tableau(f,:)); %nueva_ecua = anterior_ecua - (coef_columna enterante) x (nueva_ecuac_pivote)
+        end
+    end
+    tableau
 end
 function suma = sumatoria(variz,tabl)
     suma = zeros(1,size(tabl,2));
