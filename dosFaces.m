@@ -27,11 +27,12 @@ function dosFaces()
     fprintf('segunda fase\n');
     tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
     
-    %while( 0>min(tableau(1,1:end-1)))
-        [valin,indin] = min(tableau(1,:))
+    while(0>min(tableau(1,1:end-1)))
+        [valin,indin] = min(tableau(1,:));
         fprintf('entra X%d\n',indin);
-        div = DivX(tableau(:,end),tableau(:,indin));
-        [valout, indout] = min (div)
+        div = DivX(tableau(2:end,end),tableau(2:end,indin));
+        [valout, indout] = min (div);
+        indout = indout + 1;
         %fprintf('sale X%d\n',var_in_izq(indout));
         %var_in_izq(indout) = indin;
         tableau(indout,:)= tableau(indout,:) / tableau(indout,indin);
@@ -43,7 +44,7 @@ function dosFaces()
             end
         end
         tableau
-    %end
+    end
 
     
 end
