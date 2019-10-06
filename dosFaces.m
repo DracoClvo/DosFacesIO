@@ -4,6 +4,7 @@ function dosFaces()
     restric = input('restricciones originales\n= ');
     restric = restric * -1;
     % primera fase
+    fprintf('primera fase');
     ln = size(tableau,2);
     tableau(1,:) = tableau(1,:) - sumatoria(var_in_izq,tableau)
     yn = cont(var_in_izq);
@@ -23,21 +24,28 @@ function dosFaces()
         tableau = ceros(tableau)
     end
     %segunda fase
+    fprintf('segunda fase');
     tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
     
-    [valin,indin] = min(tableau(1,:));
-    fprintf('entra X%f',indin);
-    div = DivX(tableau(:,end),tableau(:,1));
-    [valout, indout] = min (div);
-    fprintf('sale X%f',var_in_izq(indout));
-    var_in_izq(indout) = indin;
-    tableau(intout,:)= tableau(indout,:) / tableau(indout,indin);
-    for i=1:1:size(tableau,1)  %Hace el gauss
-        if i~=f   %No realiza el gauss en la fila pivote
-            tableau(i,:)=tableau(i,:)-(tableau(i,c)*tableau(f,:)); %nueva_ecua = anterior_ecua - (coef_columna enterante) x (nueva_ecuac_pivote)
+    while( 0>min(tableau(1,1:end-1)))
+        [valin,indin] = min(tableau(1,:));
+        fprintf('entra X%d\n',indin);
+        div = DivX(tableau(:,end),tableau(:,1));
+        [valout, indout] = min (div);
+        fprintf('sale X%d\n',var_in_izq(indout));
+        var_in_izq(indout) = indin;
+        tableau(indout,:)= tableau(indout,:) / tableau(indout,indin);
+        f = indout;
+        c = indin;
+        for i=1:1:size(tableau,1)  %Hace el gauss
+            if i~=f   %No realiza el gauss en la fila pivote
+                tableau(i,:)=tableau(i,:)-(tableau(i,c)*tableau(f,:)); %nueva_ecua = anterior_ecua - (coef_columna enterante) x (nueva_ecuac_pivote)
+            end
         end
+        tableau
     end
-    tableau
+
+    
 end
 function suma = sumatoria(variz,tabl)
     suma = zeros(1,size(tabl,2));
@@ -61,7 +69,6 @@ end
 function yn = cont(verin)
     yn=0;
     for i=1:size(verin,2)
-        verin(i)
         if(verin(i) == 1)
             yn = yn + 1;
         end
