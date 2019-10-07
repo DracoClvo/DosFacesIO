@@ -22,8 +22,8 @@ function dosFaces()
             end
         end
         tableau = ceros(tableau)
-        if(min(tableau(1,1:end-1)) > 0 && tableau(1,end) ~=0)
-            sol = flase;
+        if(min(tableau(1,1:end-1)) >= 0 && tableau(1,end) ~=0)
+            sol = false;
         end
     end
     var_in_izq
@@ -51,7 +51,7 @@ function dosFaces()
             tableau
         end
     else
-        fprintf('este problema no tiene sulicion');
+        fprintf('este problema no tiene sulicion\n');
     end
     
 
