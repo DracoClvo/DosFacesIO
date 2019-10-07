@@ -8,8 +8,8 @@ function dosFaces()
     tableau(1,:) = tableau(1,:) - sumatoria(var_in_izq,tableau)
     yn = cont(var_in_izq);
     var_in_izq = var_in_izq * -1;
-    
-    while(min(var_in_izq)< 0)
+    sol = true;
+    while(min(var_in_izq)< 0 & sol)
         [valin,entra]=min(tableau(1,1:end-1));
         [valout,sale]=min(DivX(tableau(2:end,end),tableau(2:end,entra)));
         var_in_izq(sale) = entra;
@@ -22,30 +22,38 @@ function dosFaces()
             end
         end
         tableau = ceros(tableau)
+        if(min(tableau(1,1:end-1)) > 0 && tableau(1,end) ~=0)
+            sol = flase;
+        end
     end
     var_in_izq
-    %segunda fase
-    fprintf('segunda fase\n');
-    tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
-    
-    while(0>min(tableau(1,1:end-1)))
-        [valin,indin] = min(tableau(1,:));
-        fprintf('entra X%d\n',indin);
-        div = DivX(tableau(2:end,end),tableau(2:end,indin));
-        [valout, indout] = min (div);
-        indout = indout + 1;
-        fprintf('sale X%d\n',var_in_izq(indout-1));
-        var_in_izq(indout-1) = indin;
-        tableau(indout,:)= tableau(indout,:) / tableau(indout,indin);
-        f = indout;
-        c = indin;
-        for i=1:1:size(tableau,1)  %Hace el gauss
-            if i~=f   %No realiza el gauss en la fila pivote
-                tableau(i,:)=tableau(i,:)-(tableau(i,c)*tableau(f,:)); %nueva_ecua = anterior_ecua - (coef_columna enterante) x (nueva_ecuac_pivote)
+    if(sol)
+        %segunda fase
+        fprintf('segunda fase\n');
+        tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
+
+        while(0>min(tableau(1,1:end-1)))
+            [valin,indin] = min(tableau(1,:));
+            fprintf('entra X%d\n',indin);
+            div = DivX(tableau(2:end,end),tableau(2:end,indin));
+            [valout, indout] = min (div);
+            indout = indout + 1;
+            fprintf('sale X%d\n',var_in_izq(indout-1));
+            var_in_izq(indout-1) = indin;
+            tableau(indout,:)= tableau(indout,:) / tableau(indout,indin);
+            f = indout;
+            c = indin;
+            for i=1:1:size(tableau,1)  %Hace el gauss
+                if i~=f   %No realiza el gauss en la fila pivote
+                    tableau(i,:)=tableau(i,:)-(tableau(i,c)*tableau(f,:)); %nueva_ecua = anterior_ecua - (coef_columna enterante) x (nueva_ecuac_pivote)
+                end
             end
+            tableau
         end
-        tableau
+    else
+        fprintf('este problema no tiene sulicion');
     end
+    
 
     
 end
