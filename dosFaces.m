@@ -26,7 +26,7 @@ function dosFaces()
     var_in_izq
     %segunda fase
     fprintf('segunda fase\n');
-    tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
+    tableau = [restric zeros(1,size(tableau,2)-yn-size(restric,2));tableau(2:end,1:end-yn-1) tableau(2:end,end)]
     
     while(0>min(tableau(1,1:end-1)))
         [valin,indin] = min(tableau(1,:));
