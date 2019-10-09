@@ -1,17 +1,22 @@
 function dosFaces()
     tableau=input('tableau [maxz'';restricciones <=> valores]\n= ');
-    variables_basicas = input('ubicacion yis lado izquierdo 0 si no yi \n= ');
-    restric = input('coeficientes max z\n= ');
-    restric = restric * -1;
+    variables_basicas = input('variables en la base (x1... xn)\n(artificiales = -1)\n= ');
+    z_original = input('coeficientes max z\n= ');
+    z_original = z_original * -1;
     % primera fase
     fprintf('primera fase');
     tableau(1,:) = tableau(1,:) - sumatoria(variables_basicas,tableau)
     yn = cont(variables_basicas);
-    variables_basicas = variables_basicas * -1;
+    %variables_basicas = variables_basicas * -1;
     sol = true;
     while(min(variables_basicas)< 0 & sol)
         [valin,entra]=min(tableau(1,1:end-1));
         [valout,sale]=min(DivX(tableau(2:end,end),tableau(2:end,entra)));
+        if variables_basicas(sale) < 0
+            fprintf('entra X%d sale X%d(%d)\n',entra, sale,variables_basicas(sale));
+        else
+            fprintf('entra X%d sale X%d\n',entra,variables_basicas(sale));
+        end
         variables_basicas(sale) = entra;
         f = sale + 1;
         c = entra;
@@ -30,7 +35,7 @@ function dosFaces()
     if(sol)
         %segunda fase
         fprintf('segunda fase\n');
-        tableau = [restric 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
+        tableau = [z_original 0;tableau(2:end,1:end-yn-1) tableau(2:end,end)]
 
         while(0>min(tableau(1,1:end-1)))
             [valin,indin] = min(tableau(1,:));
@@ -52,35 +57,6 @@ function dosFaces()
         end
     else
         fprintf('este problema no tiene sulicion\n');
-    end
-    
+    end  
+end
 
-    
-end
-function suma = sumatoria(variz,tabl)
-    suma = zeros(1,size(tabl,2));
-    for i=1:size(variz,2)
-        if(variz(i) == 1)
-            suma = suma + tabl(i+1,:);
-        end
-    end
-end
-function tab=ceros(tableau)
-    for i=1:size(tableau,1)
-        for j=1:size(tableau,2)
-            if abs(tableau(i,j)) < 10e-10
-               tab(i,j) = round(tableau(i,j));
-            else
-                tab(i,j) = tableau(i,j);
-            end
-        end
-    end
-end
-function yn = cont(verin)
-    yn=0;
-    for i=1:size(verin,2)
-        if(verin(i) == 1)
-            yn = yn + 1;
-        end
-    end
-end
