@@ -1,18 +1,18 @@
 function dosFaces()
     tableau=input('tableau [maxz'';restricciones <=> valores]\n= ');
-    var_in_izq = input('ubicacion yis lado izquierdo 0 si no yi \n= ');
+    variables_basicas = input('ubicacion yis lado izquierdo 0 si no yi \n= ');
     restric = input('coeficientes max z\n= ');
     restric = restric * -1;
     % primera fase
     fprintf('primera fase');
-    tableau(1,:) = tableau(1,:) - sumatoria(var_in_izq,tableau)
-    yn = cont(var_in_izq);
-    var_in_izq = var_in_izq * -1;
+    tableau(1,:) = tableau(1,:) - sumatoria(variables_basicas,tableau)
+    yn = cont(variables_basicas);
+    variables_basicas = variables_basicas * -1;
     sol = true;
-    while(min(var_in_izq)< 0 & sol)
+    while(min(variables_basicas)< 0 & sol)
         [valin,entra]=min(tableau(1,1:end-1));
         [valout,sale]=min(DivX(tableau(2:end,end),tableau(2:end,entra)));
-        var_in_izq(sale) = entra;
+        variables_basicas(sale) = entra;
         f = sale + 1;
         c = entra;
         tableau(f,:) =tableau(f,:)/ tableau(f,c);
@@ -26,7 +26,7 @@ function dosFaces()
             sol = false;
         end
     end
-    var_in_izq
+    variables_basicas
     if(sol)
         %segunda fase
         fprintf('segunda fase\n');
@@ -38,8 +38,8 @@ function dosFaces()
             div = DivX(tableau(2:end,end),tableau(2:end,indin));
             [valout, indout] = min (div);
             indout = indout + 1;
-            fprintf('sale X%d\n',var_in_izq(indout-1));
-            var_in_izq(indout-1) = indin;
+            fprintf('sale X%d\n',variables_basicas(indout-1));
+            variables_basicas(indout-1) = indin;
             tableau(indout,:)= tableau(indout,:) / tableau(indout,indin);
             f = indout;
             c = indin;
